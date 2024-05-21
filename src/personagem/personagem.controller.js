@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongodb')
 const service = require('./personagem.service')
 
 async function readAll(req, res) {
@@ -9,8 +10,13 @@ async function readAll(req, res) {
 }
 
 async function readById(req, res) {
-    // Acessamos o parâmetro de rota ID-
+    // Acessamos o parâmetro de rota ID
     const id = req.params.id;
+
+    // Verificação de ObjectId inválido
+    // if (!ObjectId.isValid(id)) {
+    // return res.status(400).send({ error: 'ObjectId inválido' });
+    // }
 
     // Acessamos o personagem no service através do ID
     const item = await service.readById(id)
