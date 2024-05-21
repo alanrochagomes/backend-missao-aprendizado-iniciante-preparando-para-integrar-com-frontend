@@ -27,6 +27,12 @@ async function main() {
   // Router de Personagem
   app.use('/personagem', personagemRouter)
 
+  // Error Handling
+  app.use(function (err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).send({ error: 'Algo deu errado! '})
+  });
+
   app.listen(3000, function () {
     console.log('Servidor rodando em http://localhost:3000')
   });
